@@ -18,6 +18,7 @@ class Tester:
     def __init__(self, dict_param) -> None:
         self._init_params(dict_param)
         self.dataset_name = self.data_path.split("/")[-2]
+        assert self.dataset_name in ["s7", "p20"]
         self.model_name = f"{self.model_name}_{self.dataset_name}_{self.total_step}step_{self.batch_size}bs_{self.lr}lr_{self.num_gpu}gpu_{self.num_experiment}run"
         
         self.dataset = ReversedISPDataset(root=self.data_path, test=True)
@@ -25,7 +26,7 @@ class Tester:
         
         self.to_pil = T.ToPILImage()
 
-        self.net = build_model(n_channels=self.n_channels_G, out_channels=4)
+        self.net = build_model(n_channels=self.n_channels_G, out_channels=4, model_type=self.dataset_name)
         
         self.SSIM = SSIM()
         

@@ -231,10 +231,11 @@ if __name__ == '__main__':
     # from torchvision.models.vgg import vgg16
     # vgg_feats = vgg16(pretrained=True).features.eval().cuda()
     # vgg_feats = nn.Sequential(*[module for module in vgg_feats][:35])
-    ifrnet = IFRNetv4(32, 4).cuda()
-    x = torch.rand((4, 3, 496, 496)).cuda()
+    ifrnet = IFRNetv4P20(32, 4)
+    x = torch.rand((4, 3, 496, 496))
     output = ifrnet(x)
     print(output.size())
+    ifrnet.print_network()
 
     # disc = Discriminator(32, 4).cuda()
     # d_out = disc(output)
